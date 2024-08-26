@@ -1,0 +1,32 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 2023,
+      "sourceType": "module",
+      "project": "./tsconfig.json",
+      "tsconfigRootDir": "./"
+    },
+    "plugins": [
+      "@typescript-eslint",
+      "no-relative-import-paths"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "no-useless-escape": "off",
+      "no-case-declarations": "off",
+      "@typescript-eslint/no-empty-interface": "off",
+      "no-relative-import-paths/no-relative-import-paths": [
+        "error", 
+        {
+          "allowSameFolder": false,
+          "rootDir": "test",
+          "prefix": ""
+        }
+      ]
+    }
+  }
+  

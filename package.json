@@ -1,0 +1,34 @@
+{
+  "name": "example-new-dawn",
+  "version": "0.0.1-alpha.9",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:cache": "synpress",
+    "build:cache:force": "synpress --force",
+    "build:cache:headless": "synpress --force --headless",
+    "serve:test-dapp": "serve node_modules/@metamask/test-dapp/dist -p 9999",
+    "test:playwright:headful": "playwright test",
+    "test:playwright:headless": "HEADLESS=true playwright test",
+    "lint": "eslint . --ext .ts",
+    "format": "npx prettier . --write"
+  },
+  "dependencies": {
+    "@playwright/test": "1.44.0",
+    "@synthetixio/synpress": "4.0.0-alpha.9",
+    "dotenv": "16.4.2",
+    "@typescript-eslint/eslint-plugin": "5.36.1",
+    "@typescript-eslint/parser": "5.36.1",
+    "eslint": "8.23.0",
+    "eslint-config-prettier": "8.8.0",
+    "eslint-plugin-no-relative-import-paths": "^1.5.4",
+    "prettier": "3.0.0",
+    "pretty-quick": "3.1.3"
+  },
+  "devDependencies": {
+    "@metamask/test-dapp": "8.1.0",
+    "@types/node": "20.11.17",
+    "serve": "14.2.1",
+    "typescript": "5.3.3"
+  }
+}

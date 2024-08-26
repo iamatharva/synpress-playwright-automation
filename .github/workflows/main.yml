@@ -1,0 +1,62 @@
+name: Run E2E tests (headful)
+
+# Event triggers
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test-e2e-headful:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node & Install dependencies
+        uses: ./.github/actions/setup
+
+      - name: Install Playwright dependencies
+        run: pnpm dlx playwright@1.44.0 install-deps
+
+      # For now, we only need Chromium.
+      - name: Install browsers for Playwright
+        run: pnpm dlx playwright@1.44.0 install chromium
+
+      - name: Install linux dependencies
+        run: |
+          sudo apt-get install --no-install-recommends -y xvfb
+
+      - name: Build project
+        run: pnpm install
+
+      - name: Serve MetaMask Test Dapp
+        run: |
+          pnpm run serve:test-dapp &
+
+      - name: Build cache
+        env:
+          SEED_PHRASE: ${{ secrets.SEED_PHRASE }}
+          WALLET_PASSWORD: ${{ secrets.WALLET_PASSWORD }}
+        run: |
+          xvfb-run pnpm run build:cache:force
+
+      - name: Run E2E tests (headful)
+        env:
+          SEED_PHRASE: ${{ secrets.SEED_PHRASE }}
+          WALLET_PASSWORD: ${{ secrets.WALLET_PASSWORD }}
+        run: |
+          xvfb-run pnpm run test:playwright:headful
+
+      - name: Archive Playwright report
+        uses: actions/upload-artifact@v3
+        if: success() || failure()
+        with:
+          name: playwright-report-headful
+          path: |
+            playwright-report-headful/
+          if-no-files-found: error

@@ -1,0 +1,9 @@
+node_modules
+.prettierrc.json
+.eslintrc
+pnpm-lock.ynl
+.nvmrc
+.prettierrc
+.cache-synpress
+.cache-synpress
+test-results
