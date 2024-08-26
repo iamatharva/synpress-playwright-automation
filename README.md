@@ -2,9 +2,19 @@
 
 The "Swap" feature in the Mento application is a critical component that allows users to exchange cryptocurrencies directly within the platform. This feature's reliability and security are essential for maintaining user trust and ensuring the smooth operation of the Mento protocol.
 
+# Enviorment Step and Pre requisites
+Please follow the guide to setup the [EnviormentSetup.md](EnviormentSetup.md)
+
+# Test Plan:
+The detailed test plan could be accessed here [TestPlan.md](TestPlan.md)
+
 # 🧑‍💻 Usage
 
-1. Install dependencies:
+1. Install dependencies with pnpm version 9.7.1
+
+```bash
+nvm use
+```
 
 ```bash
 pnpm install
